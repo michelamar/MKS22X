@@ -1,6 +1,6 @@
 public class QueenBoard{
     private int[][]board;
-    private int solutionCount;
+    private int solutionCount = -1;
     
     public QueenBoard(int size){
 	board = new int[size][size];
@@ -22,18 +22,24 @@ public class QueenBoard{
      */
     public void solve(){
 	//	System.out.println(this);
-	solveH(0);
+	solveH(0, true);
     }
 
-    private boolean solveH(int col){
+    private boolean solveH(int col, boolean stop){
 	if (col >= board[0].length){
-	    return false;
+	    if(stop){
+		return true;
+	    }
+	    else{
+	    	solutionCount++;
+		return false;
+	    }
 	}
 	else {
 	    for (int row = 0; row < board[0].length; row++){
 		if (board[row][col] == 0){
 		    addQueen(row, col);
-		    if (solveH(col+1)){
+		    if (solveH(col+1, stop)){
 			return true;
 		    }
 		    else{
@@ -79,7 +85,6 @@ public class QueenBoard{
 	    }
 	}
     }
-
     private void removeQueen(int row, int col){
 	board[row][col] = 0;
 	for (int i = 0; i < board[0].length; i++){
@@ -120,7 +125,12 @@ public class QueenBoard{
      *The board should be reset after this is run.    
      */
     public int getSolutionCount(){
-    	return -1;
+    	return solutionCount;
+    }
+
+    public void countSolutions(){
+	solutionCount++;
+	solveH(0, false);
     }
     /**toString
      *and all nunbers that represent queens are replaced with 'Q' 
@@ -130,7 +140,13 @@ public class QueenBoard{
     	String toPrint = "" ;
 	for (int row = 0; row < board[0].length; row++){
 	    for (int col = 0; col < board[row].length; col++){
-		toPrint += board[row][col];
+		toPrint+=board[row][col] + " ";
+		//if(board[row][col] == -1){
+		//    toPrint += "Q ";
+		//}
+		//else{
+		 //   toPrint += "_ ";
+		//}
 	    }
 	    toPrint += "\n";
 	}
@@ -138,8 +154,8 @@ public class QueenBoard{
     }
 
     public static void main(String[]args){
-	QueenBoard a = new QueenBoard(4);
-	a.solve();
-	System.out.println(a);
+	QueenBoard a = new QueenBoard(9);
+	a.addQueen(0,0);
+	System.out.println(a);//.getSolutionCount());
     }
 }
