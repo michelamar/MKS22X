@@ -21,22 +21,42 @@ public class Maze{
     */
 
     public Maze(String filename){
-	int count = 0;
-	String line = "";
-	int scount = 0;
+        int scount = 0;
 	int ecount = 0;
         try{
+	    int count = 0;
+	    String line = "";
 	    Scanner sc = new Scanner(new File(filename));
 	    while (sc.hasNextLine()){
 		line = sc.nextLine();
 		count++;
 	    }
 	    maze = new char[count][line.length()];
+	    Scanner sc1 = new Scanner(new File(filename));
+	    for(int r = 0; r < count; r++){
+		String currentLine = sc1.nextLine();
+		for(int c = 0; c < currentLine.length(); c++){
+		    maze[r][c] = currentLine.charAt(c);
+	   	}
+	    }
 	}catch (FileNotFoundException e){
 	    System.out.println ("Invalid file name or path");
 	    System.exit(1);
-	
-}
+	}
+	for(int r = 0; r < maze.length; r++){
+	    for(int c = 0; c < maze[0].length; c++){
+		if (maze[r][c] == 'S'){
+		    scount++;
+		}
+		if (maze[r][c] == 'E'){
+		    ecount++;
+		}
+	    }
+	}
+	if (ecount != 1 || scount != 1){
+	    System.out.println("Maze does not have one S and one E");
+	    System.exit(0);
+    	}
     }
     
 
@@ -104,6 +124,22 @@ public class Maze{
         //COMPLETE SOLVE
 
         return false; //so it compiles
+    }
+
+    public String toString(){
+	String output = "";
+	for(int r = 0; r < maze.length; r++){
+	    for(int c = 0; c < maze[0].length; c++){
+		output+=maze[r][c];
+	    }
+	output+="\n";
+	}	
+	return output;
+    }
+
+    public static void main(String[]args){
+	Maze a = new Maze("test.txt");
+	System.out.println(a);
     }
 
 
