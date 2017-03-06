@@ -6,6 +6,8 @@ public class Maze{
 
     private char[][]maze;
     private boolean animate;
+    private int[] deltax = {-1, 0,  0 ,1};
+    private int[] deltay = { 0, 1, -1, 0};
 
     /*Constructor loads a maze text file, and sets animate to false by default.
       1. The file contains a rectangular ascii maze, made with the following 4 characters:
@@ -59,43 +61,50 @@ public class Maze{
     	}
     }
     
-
+    
     private void wait(int millis){ //ADDED SORRY!
-         try {
-             Thread.sleep(millis);
-         }
-         catch (InterruptedException e) {
-         }
-     }
-
-
+	try {
+	    Thread.sleep(millis);
+	}
+	catch (InterruptedException e) {
+	}
+    }
+    
+    
     public void setAnimate(boolean b){
-
+	
         animate = b;
-
+	
     }
-
-
+    
+    
     public void clearTerminal(){
-
+	
         //erase terminal, go to top left of screen.
-
+	
         System.out.println("\033[2J\033[1;1H");
-
+	
     }
-
-
-
+    
+    
+    
     /*Wrapper Solve Function
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
     */
     public boolean solve(){
-            int startr=-1,startc=-1;
-
-            //Initialize starting row and startint col with the location of the S. 
-
-            maze[startr][startc] = ' ';//erase the S, and start solving!
-            return solve(startr,startc);
+	int startr=-1,startc=-1;
+	
+	for(int r = 0; r < maze.length; r++){
+	    for (int c = 0; c < maze[0].length; c++){
+		if (maze[r][c] == 'S'){
+		    startr = r;
+		    startc = c;
+		}
+	    }
+	}
+	
+	maze[startr][startc] = ' ';//erase the S, and start solving!
+	return solve(startr,startc);
     }
 
     /*
@@ -115,16 +124,65 @@ public class Maze{
         All visited spots that are part of the solution are changed to '@'
     */
     private boolean solve(int row, int col){
-        if(animate){
-            System.out.println("\033[2J\033[1;1H"+this);
+       if(animate){
+           System.out.println("\033[2J\033[1;1H"+this);
+	   wait(20);
+       }
+       
+       if (maze[row][col] == 'E'){
+	   return true;
+       }
 
-            wait(20);
-        }
+       else if (maze[row][col] != ' '){
+	   return false;
+       }
+       
+       else{
+	   maze[row][col] = '@';
+	   for (int option = 0; option < deltax.length; option++){
+	       if (solve (row + deltax[option], col + deltay[option])){
+		   return true;
+	       }
+	   }
+       // for (Integer[] coordinate : findMoves(row, col)){
+       // 	   // maze[coordinate[0]][coordinate[1]] = '@';
+       // 	   if (solve(coordinate[0], coordinate[1])){
+       // 	       // maze[coordinate[0]][coordinate[1]] = '@';
+       // 	       return true;
+       // 	   }
+       // }
+	   maze[row][col] = '.';
 
-        //COMPLETE SOLVE
+	   return false; //so it compiles
+       }
+       
 
-        return false; //so it compiles
     }
+    
+    
+
+    public ArrayList<Integer[]> findMoves(int row, int col){
+	ArrayList<Integer[]> moves = new ArrayList<Integer[]>();
+	if (row - 1 >= 0 && col < maze[0].length &&
+	    maze[row - 1][col]==' '){// != '#' && maze[row-1][col]!='.'){
+	    moves.add(new Integer[]{row - 1, col});
+	}
+	if (row  < maze.length && col + 1 < maze[0].length &&
+	    maze[row][col + 1] ==' '){//!= '#' && maze[row][col+1]!='.'){
+	    moves.add(new Integer[]{row, col + 1});
+	}
+
+	if (row + 1 < maze.length && col < maze[0].length &&
+	    maze[row +1][col]==' '){ //!= '#' && maze[row+1][col]!='.'){
+	    moves.add(new Integer[]{row + 1, col});
+	}
+	if (row < maze.length && col-1 >= 0 &&
+	    maze[row][col-1]==' '){// != '#' && maze[row][col-1]!='.'){
+	    moves.add(new Integer[]{row, col-1});
+	}
+	return moves;
+    }
+		
 
     public String toString(){
 	String output = "";
@@ -139,6 +197,8 @@ public class Maze{
 
     public static void main(String[]args){
 	Maze a = new Maze("test.txt");
+	//a.setAnimate(true);
+	a.solve();
 	System.out.println(a);
     }
 
