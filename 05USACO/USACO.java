@@ -19,6 +19,7 @@ public class USACO{
 	col = scan.nextInt();
 	elevation = scan.nextInt();
 	steps = scan.nextInt();
+	//System.out.println (steps);
 	lake = new int[row][col];
 
 	for (int r = 0; r < row; r++){
@@ -31,13 +32,16 @@ public class USACO{
 
 	for (int stepsLeft = steps; stepsLeft > 0; stepsLeft--){
 	    int origRow = scan.nextInt();
+	    // System.out.println (origRow);
 	    int origCol = scan.nextInt();
+	    //System.out.println (origCol);
 	    int amount = scan.nextInt();
+	    // System.out.println (amount);
 	    //stomp(lake, origRow, origCol, amount);
 	    int highestElevation = 0;
 
-	    for (int r = origRow; r < origRow + 2; r++){
-		for (int c = origCol; c < origCol + 2; c++){
+	    for (int r = origRow-1; r < origRow + 2; r++){
+		for (int c = origCol-1; c < origCol + 2; c++){
 		    if (r < lake.length && c < lake[0].length){
 			if (lake[r][c] > highestElevation){
 			    highestElevation = lake[r][c];
@@ -45,11 +49,12 @@ public class USACO{
 		    }
 		}
 	    }
+	    //System.out.println(highestElevation);
 	    
 	    int newElevation = highestElevation - amount;
 	
-	    for (int r = origRow; r < origRow + 2; r++){
-		for (int c = origCol; c < origCol + 2; c++){
+	    for (int r = origRow-1; r < origRow + 2; r++){
+		for (int c = origCol-1; c < origCol + 2; c++){
 		    if (r < lake.length && c < lake[0].length){
 			if (lake[r][c] > newElevation){
 			    lake[r][c] = newElevation;
@@ -58,10 +63,11 @@ public class USACO{
 		}
 	    }
 	    
-	    System.out.println (stringOf(lake));
+	    //System.out.println (stringOf(lake));
 	}
 	
 	finalElevation(lake, elevation);
+	//System.out.println(stringOf(lake));
 	
 	return findVolume(lake);
 
@@ -115,7 +121,10 @@ public class USACO{
 		sum += grid[r][c];
 	    }
 	}
-	return sum * grid.length * 12 * grid[0].length * 12;
+	
+	//System.out.println(grid.length);
+	//System.out.println(grid[0].length);
+	return sum * 72 * 72;
     }
 
     private static String stringOf(int[][] grid){
@@ -130,7 +139,7 @@ public class USACO{
     }
 
     public static void main(String[]args){
-	System.out.println(USACO.bronze("makelake.1.in"));
+	System.out.println(USACO.bronze("makelake.3.in"));
     }
 
 
