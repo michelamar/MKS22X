@@ -73,32 +73,6 @@ public class USACO{
 
 	
     }
-  
-    private static void stomp(int[][] grid, int origRow, int origCol, int amount){
-	int highestElevation = 0;
-
-	for (int row = origRow; row < origRow + 2; row++){
-	    for (int col = origCol; col < origCol + 2; col++){
-		if (row < grid.length && col < grid[0].length){
-		    if (grid[row][col] > highestElevation){
-			highestElevation = grid[row][col];
-		    }
-		}
-	    }
-	}
-
-	int newElevation = highestElevation - amount;
-
-	for (int row = origRow; row < origRow + 2; row++){
-	    for (int col = origCol; col < origCol + 2; col++){
-		if (row < grid.length && col < grid[0].length){
-		    if (grid[row][col] > newElevation){
-			grid[row][col] = newElevation;
-		    }
-		}
-	    }
-	}
-    }
 
 
     private static void finalElevation (int[][] grid, int elevation){
