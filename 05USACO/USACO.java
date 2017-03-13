@@ -27,15 +27,42 @@ public class USACO{
 	    }
 	}
 
+	//System.out.println (stringOf(lake));
+
 	for (int stepsLeft = steps; stepsLeft > 0; stepsLeft--){
 	    int origRow = scan.nextInt();
 	    int origCol = scan.nextInt();
 	    int amount = scan.nextInt();
-	    stomp(lake, origRow, origCol, amount);
+	    //stomp(lake, origRow, origCol, amount);
+	    int highestElevation = 0;
+
+	    for (int r = origRow; r < origRow + 2; r++){
+		for (int c = origCol; c < origCol + 2; c++){
+		    if (r < lake.length && c < lake[0].length){
+			if (lake[r][c] > highestElevation){
+			    highestElevation = lake[r][c];
+			}
+		    }
+		}
+	    }
+	    
+	    int newElevation = highestElevation - amount;
+	
+	    for (int r = origRow; r < origRow + 2; r++){
+		for (int c = origCol; c < origCol + 2; c++){
+		    if (r < lake.length && c < lake[0].length){
+			if (lake[r][c] > newElevation){
+			    lake[r][c] = newElevation;
+			}
+		    }
+		}
+	    }
+	    
+	    System.out.println (stringOf(lake));
 	}
-
+	
 	finalElevation(lake, elevation);
-
+	
 	return findVolume(lake);
 
 	
@@ -89,6 +116,17 @@ public class USACO{
 	    }
 	}
 	return sum * grid.length * 12 * grid[0].length * 12;
+    }
+
+    private static String stringOf(int[][] grid){
+	String ans = "";
+	for (int r = 0; r < grid.length; r++){
+	    for (int c = 0; c < grid[0].length; c++){
+		ans += grid[r][c] + " ";
+	    }
+	    ans+= "\n";
+	}
+	return ans;
     }
 
     public static void main(String[]args){
