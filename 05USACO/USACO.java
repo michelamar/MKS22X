@@ -101,6 +101,71 @@ public class USACO{
 	return sum * 72 * 72;
     }
 
+    public static int silver(String filename){
+	Scanner scan = null;
+	int[][] pasture;
+	int r1, r2, c1, c2, time;
+	try{
+	    scan = new Scanner(new File(filename));
+	}
+	catch(FileNotFoundException e) {
+	    System.out.println("File not found");
+	}
+
+	int rows = scan.nextInt();
+	int cols = scan.nextInt();
+	time = scan.nextInt();
+	pasture = new int[rows][cols];
+
+	for (int r = 0; r < rows; r++){
+	    for (int c = 0; c < cols; c++){
+		if(scan.hasNext()){
+		    if (scan.next() == "."){
+			pasture[r][c] = 0;
+		    }
+		    if (scan.next() == "*"){
+			pasture[r][c] = -1;
+		    }
+		}
+	    }
+	}
+
+	r1 = scan.nextInt();
+	c1 = scan.nextInt();
+	r2 = scan.nextInt();
+	c2 = scan.nextInt();
+
+	pasture[r1][c1] = 1;
+
+	for (int seconds = time; seconds > 0; seconds--){
+	    adjustPaths(pasture);
+	}
+
+	return pasture[r2][c2];
+	
+    }
+
+    private static void adjustPaths(int[][] grid){
+	for (int r = 0; r < grid.length; r++){
+	    for (int c = 0; c < grid[0].length; c++){
+		int sum = 0;
+		if (r-1 > 0 && grid[r-1][c] != -1){
+		    sum += grid[r-1][c];
+		}
+		if (c-1 > 0 && grid[r][c-1] != -1){
+		    sum += grid[r][c-1];
+		}
+		if (r+1 < grid.length && grid[r+1][c] != -1){
+		    sum += grid[r+1][c];
+		}
+		if (c+1 < grid[0].length && grid[r][c+1] != -1){
+		    sum += grid[r][c+1];
+		}
+		grid[r][c] = sum;
+	    }
+	}		
+    }
+
     private static String stringOf(int[][] grid){
 	String ans = "";
 	for (int r = 0; r < grid.length; r++){
@@ -113,7 +178,7 @@ public class USACO{
     }
 
     public static void main(String[]args){
-	System.out.println(USACO.bronze("makelake.3.in"));
+	System.out.println(USACO.silver("ctravel.1.in"));
     }
 
 
