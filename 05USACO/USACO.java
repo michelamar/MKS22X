@@ -111,59 +111,83 @@ public class USACO{
 	catch(FileNotFoundException e) {
 	    System.out.println("File not found");
 	}
+	Scanner header = new Scanner(scan.nextLine());
+	int rows = header.nextInt();
+	int cols = header.nextInt();
+	time = header.nextInt();
 
-	int rows = scan.nextInt();
-	int cols = scan.nextInt();
-	time = scan.nextInt();
 	pasture = new int[rows][cols];
+	int[][]pastureTemp = new int[rows][cols];
 
 	for (int r = 0; r < rows; r++){
+	    String row = scan.nextLine();
 	    for (int c = 0; c < cols; c++){
-		if(scan.hasNext()){
-		    if (scan.next() == "."){
-			pasture[r][c] = 0;
-		    }
-		    if (scan.next() == "*"){
-			pasture[r][c] = -1;
-		    }
+		if(row.charAt(c) == '*'){
+		    pasture[r][c]= -1;
+		}
+		else{
+		    pasture[r][c] = 0;
 		}
 	    }
 	}
+	//System.out.println(stringOf(pasture));
 
-	r1 = scan.nextInt();
-	c1 = scan.nextInt();
-	r2 = scan.nextInt();
-	c2 = scan.nextInt();
+	Scanner startAndEnd = new Scanner(scan.nextLine());
+	r1 = startAndEnd.nextInt()-1;
+	c1 = startAndEnd.nextInt()-1;
+	r2 = startAndEnd.nextInt()-1;
+	c2 = startAndEnd.nextInt()-1;
 
 	pasture[r1][c1] = 1;
 
-	for (int seconds = time; seconds > 0; seconds--){
-	    adjustPaths(pasture);
+	for (int seconds = 0; seconds < time; seconds++){
+	    adjustPaths(pasture, pastureTemp);
+	    //System.out.println(stringOf(pasture));
 	}
 
 	return pasture[r2][c2];
 	
     }
 
-    private static void adjustPaths(int[][] grid){
-	for (int r = 0; r < grid.length; r++){
-	    for (int c = 0; c < grid[0].length; c++){
-		int sum = 0;
-		if (r-1 > 0 && grid[r-1][c] != -1){
-		    sum += grid[r-1][c];
+    private static void adjustPaths(int[][] pasture, int[][] pastureTemp){
+	for(int r=0; r<pastureTemp.length; r++){
+	    for(int c=0; c<pastureTemp[0].length; c++){
+		if(pasture[r][c]==-1){
+		    pastureTemp[r][c]=-1;
+		}else{
+		    int up;
+		    int down;
+		    int left;
+		    int right;
+		    if(r-1<0 || pasture[r-1][c] == -1){
+			up = 0;
+		    }else{
+			up = pasture[r-1][c];
+		    }
+		    if(r+1>=pasture.length || pasture[r + 1][c] == -1){
+			down = 0;
+		    }else{
+			down = pasture[r+1][c];
+		    }
+		    if(c-1<0 || pasture[r][c-1] == -1){
+			left = 0;
+		    }else{
+			left = pasture[r][c-1];
+		    }
+		    if(c+1 >= pasture[0].length || pasture[r][c+1] == -1){
+			right = 0;
+		    }else{
+			right = pasture[r][c+1];
+		    }
+		    pastureTemp[r][c]=up+down+left+right;
 		}
-		if (c-1 > 0 && grid[r][c-1] != -1){
-		    sum += grid[r][c-1];
-		}
-		if (r+1 < grid.length && grid[r+1][c] != -1){
-		    sum += grid[r+1][c];
-		}
-		if (c+1 < grid[0].length && grid[r][c+1] != -1){
-		    sum += grid[r][c+1];
-		}
-		grid[r][c] = sum;
 	    }
-	}		
+	}
+	for(int r=0; r<pasture.length; r++){
+	    for(int c=0; c<pasture[0].length; c++){
+		pasture[r][c]=pastureTemp[r][c];
+	    }
+	}
     }
 
     private static String stringOf(int[][] grid){
