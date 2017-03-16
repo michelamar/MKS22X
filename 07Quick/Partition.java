@@ -4,6 +4,7 @@ public class Partition{
 
     public static int part(int[] data, int start, int end){
 	int pivotIndex = start + (int)(Math.random() * (end - start));
+	//System.out.println(end - start);
 	//System.out.println(data[pivotIndex]);
 	int smallEnd = 0;
 	int bigEnd = end - start - 1;

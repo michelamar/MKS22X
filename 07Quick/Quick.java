@@ -1,14 +1,19 @@
 public class Quick{
 
-    public static int quickselect(int []data, int k, int low, int high){
+    public static int quickselect(int[] data, int k){
+	return select(data, k, 0, data.length);
+    }
+
+    public static int select(int []data, int k, int low, int high){
 	int pivot = Partition.part(data, low, high);
 	if (pivot < k){
-	    return quickselect(data, k, pivot+1, high);
+	    return select(data, k, pivot+1, high);
 	}
 	else if (pivot > k){
-	    return quickselect(data, k, low, pivot-1);
+	    return select(data, k, low, pivot);
 	}
 	else{
+	    System.out.println(Partition.stringOf(data));
 	    return data[k];
 	}
     }
