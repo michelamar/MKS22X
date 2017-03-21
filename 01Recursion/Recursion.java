@@ -14,7 +14,10 @@ public class Recursion{
     }
 
     public static double sqrtGuess(double n, double guess){
-	if (closeEnough(guess*guess, n)){
+	if (n == 0){
+	    return 0.0;
+	}
+	else if (closeEnough(guess*guess, n)){
 	    return guess;
 	}
 	else{
@@ -28,7 +31,7 @@ public class Recursion{
     }
 
     public static void main(String[]args){
-	System.out.println(sqrt(121));
+	System.out.println(sqrt(0));
     }
 		       
 
