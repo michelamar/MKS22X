@@ -13,10 +13,10 @@ public class Partition{
 	while (currentIndex <= greaterThan){
 	    if (data[currentIndex] == value){
 		currentIndex++;
-		System.out.println ("current = value");
+		//	System.out.println ("current = value");
 	    }
 	    else if (data[currentIndex] < value){
-		System.out.println ("current < value");
+		//	System.out.println ("current < value");
 		swap(data, currentIndex, lessThan);
 		currentIndex++;
 		lessThan++;

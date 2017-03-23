@@ -13,41 +13,47 @@ public class Quick{
 	    return select(data, k, low, pivot);
 	}
 	else{
-	    System.out.println(Partition.stringOf(data));
+	    //System.out.println(Partition.stringOf(data));
 	    return data[k];
 	}
     }
 
     public static int[] quicksort (int[] data){
-	return quicksortHelper(data, 0, data.length);
+	return quicksortHelper(data, 0, data.length,0);
     }
 
-    public static int[] quicksortHelper(int[] data, int start, int end){
+    public static int[] quicksortHelper(int[] data, int start, int end, int count){
+	while (count < end - start){
+	  
 	int pivotIndex = start + (int)(Math.random() * (end - start));
 	int value = data[pivotIndex];
 	int currentIndex = 1;
-	int lessThan = 0;
-	int greaterThan = end - start - 1;
-	swap (data, 0, pivotIndex);
-	while (currentIndex < greaterThan){
+	int lessThan = start;
+	int greaterThan = end - 1;
+	//System.out.println (value);
+	swap (data, start, pivotIndex);
+	while (currentIndex <= greaterThan){
 	    if (data[currentIndex] == value){
 		currentIndex++;
+		//System.out.println ("current = value");
 	    }
 	    else if (data[currentIndex] < value){
+		//System.out.println ("current < value");
 		swap(data, currentIndex, lessThan);
 		currentIndex++;
 		lessThan++;
 	    }
 	    else{
+		//System.out.println ("current > value");
 		swap(data, currentIndex, greaterThan);
+		greaterThan--;
 	    }
 	}
-
-	quicksortHelper(data, start, lessThan);
-	quicksortHelper(data, greaterThan, end);
+	    quicksortHelper(data, start, lessThan, count++);
+	    quicksortHelper(data, greaterThan, end, count++);
 	
+	}
 	return data;
-
     }
 
     public static void swap (int[] ary, int pos1, int pos2){
@@ -66,8 +72,8 @@ public class Quick{
 
     public static void main(String[]args){
 	int[]ary = { 2, 10, 15, 23, 0,  5};
-	System.out.println(stringOf(quicksort(ary)));
-	// System.out.println(quickselect( ary , 0 ));  //would return 0
+	//System.out.println(stringOf(quicksort(ary)));
+	System.out.println(quickselect( ary , 0 ));  //would return 0
 	// System.out.println("ln");
 	// System.out.println(quickselect( ary , 1 ));  //would return 2
 	// System.out.println("ln");
