@@ -6,24 +6,29 @@ public class Partition{
 	int pivotIndex = start + (int)(Math.random() * (end - start));
 	int value = data[pivotIndex];
 	int currentIndex = 1;
-	int lessThan = 0;
-	int greaterThan = end - start - 1;
-	swap (data, 0, pivotIndex);
-	while (currentIndex < greaterThan){
+	int lessThan = start;
+	int greaterThan = end - 1;
+	System.out.println (value);
+	swap (data, start, pivotIndex);
+	while (currentIndex <= greaterThan){
 	    if (data[currentIndex] == value){
 		currentIndex++;
+		System.out.println ("current = value");
 	    }
 	    else if (data[currentIndex] < value){
+		System.out.println ("current < value");
 		swap(data, currentIndex, lessThan);
 		currentIndex++;
 		lessThan++;
 	    }
 	    else{
+		//System.out.println ("current > value");
 		swap(data, currentIndex, greaterThan);
+		greaterThan--;
 	    }
 	}
 	
-	return (greaterThan - lessThan) / 2;
+	return (greaterThan);
 	    
     }
     
@@ -44,8 +49,8 @@ public class Partition{
 
 
     public static void main(String[]args){
-	int[] a = {100, 0, 0, 0, 1, 2, 3, 5, 9, 6, 52, 4, 33};
-	System.out.println(part(a, 6, a.length));
+	int[] a = {1, 5, 3, 2, 4, 0};
+	System.out.println(part(a, 0, a.length));
 	System.out.println(stringOf(a));
     }
 
