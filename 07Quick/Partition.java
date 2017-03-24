@@ -8,7 +8,7 @@ public class Partition{
 	int currentIndex = 1;
 	int lessThan = start;
 	int greaterThan = end - 1;
-	System.out.println (value);
+	//System.out.println (value);
 	swap (data, start, pivotIndex);
 	while (currentIndex <= greaterThan){
 	    if (data[currentIndex] == value){
