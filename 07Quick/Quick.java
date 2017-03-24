@@ -70,20 +70,27 @@ public class Quick{
 	return ans;
     }
 
+    public static int[] aryGenerator(){
+	int[] ary = new int[(int)(Math.random() * 1000000)];
+	for (int pos = 0; pos < ary.length; pos++){
+	    ary[pos] = Math.random() * 900000000;
+	}
+    }
+
     public static void main(String[]args){
-	int[]ary = { 2, 10, 15, 23, 0,  5, 92, 34, 308, 29, 87};
+	int[]ary = {aryGenerator};
 	System.out.println(stringOf(quicksort(ary)));
-	System.out.println(quickselect( ary , 0 ));  //would return 0
-	System.out.println("ln");
-	System.out.println(quickselect( ary , 1 ));  //would return 2
-	System.out.println("ln");
-	System.out.println(quickselect( ary , 2 ));  //would return 5
-	System.out.println("ln");
-	System.out.println(quickselect( ary , 3 ));  //would return 10
-	System.out.println("ln");
-	System.out.println(quickselect( ary , 4 ));  //would return 15
-	System.out.println("ln");
-	System.out.println(quickselect( ary , 5 ));  //would return 23
+//	System.out.println(quickselect( ary , 0 ));  //would return 0
+//	System.out.println("ln");
+//	System.out.println(quickselect( ary , 1 ));  //would return 2
+//	System.out.println("ln");
+//	System.out.println(quickselect( ary , 2 ));  //would return 5
+//	System.out.println("ln");
+//	System.out.println(quickselect( ary , 3 ));  //would return 10
+//	System.out.println("ln");
+//	System.out.println(quickselect( ary , 4 ));  //would return 15
+//	System.out.println("ln");
+//	System.out.println(quickselect( ary , 5 ));  //would return 23
 
 
 
