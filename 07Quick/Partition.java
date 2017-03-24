@@ -5,10 +5,10 @@ public class Partition{
     public static int part(int[] data, int start, int end){
 	int pivotIndex = start + (int)(Math.random() * (end - start));
 	int value = data[pivotIndex];
-	int currentIndex = 1;
+	int currentIndex = start;
 	int lessThan = start;
 	int greaterThan = end - 1;
-	//System.out.println (value);
+	//	System.out.println (value);
 	swap (data, start, pivotIndex);
 	while (currentIndex <= greaterThan){
 	    if (data[currentIndex] == value){
@@ -49,7 +49,7 @@ public class Partition{
 
 
     public static void main(String[]args){
-	int[] a = {1, 5, 3, 2, 4, 0};
+	int[] a = {1, 5, 3, 2, 4, 0, 8, 6, 7};
 	System.out.println(part(a, 0, a.length));
 	System.out.println(stringOf(a));
     }

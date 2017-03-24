@@ -27,7 +27,7 @@ public class Quick{
 	  
 	    int pivotIndex = start + (int)(Math.random() * (end - start));
 	    int value = data[pivotIndex];
-	    int currentIndex = 1;
+	    int currentIndex = start;
 	    int lessThan = start;
 	    int greaterThan = end - 1;
 	    //System.out.println (value);
@@ -49,7 +49,7 @@ public class Quick{
 		    greaterThan--;
 		}
 	    }
-	    quicksortHelper(data, start, lessThan - 1);
+	    quicksortHelper(data, start, lessThan);
 	    quicksortHelper(data, greaterThan + 1, end);
 	
 	}
@@ -71,7 +71,7 @@ public class Quick{
     }
 
     public static void main(String[]args){
-	int[]ary = { 2, 10, 15, 23, 0,  5, 39, 22, 1, 7, 6, 34, 97, 8};
+	int[]ary = { 2, 10, 15, 23, 0,  5, 92, 34, 308, 29, 87};
 	System.out.println(stringOf(quicksort(ary)));
 	System.out.println(quickselect( ary , 0 ));  //would return 0
 	System.out.println("ln");
