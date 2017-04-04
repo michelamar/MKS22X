@@ -10,8 +10,16 @@ public class MyLinkedList{
     }
 
     public boolean add (int value){
-	LNode toAdd = new LNode(value, start, null);
+	LNode toAdd = new LNode(value);
+	if(size == 0){
+	    start = toAdd;
+	}
+	toAdd.setNext(start);
+	toAdd.setPrev(null);
+	start.setPrev(toAdd);
+	//System.out.println (toAdd);
 	start = toAdd;
+	size++;
 	return true;
     }
 
@@ -32,10 +40,20 @@ public class MyLinkedList{
 	private LNode next;
 	private LNode prev;
 
-	public LNode (int val, LNode nextNode, LNode prevNode){
+
+	public LNode (int val){
 	    value = val;
+	}
+	
+	public void setNext(LNode nextNode){
 	    next = nextNode;
+	}
+	public void setPrev(LNode prevNode){
 	    prev = prevNode;
+	}
+
+	public String toString(){
+	    return "" + value;
 	}
 	
     }
