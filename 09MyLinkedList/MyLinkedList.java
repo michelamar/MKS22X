@@ -12,8 +12,8 @@ public class MyLinkedList{
     public boolean add (int value){
 	LNode toAdd = new LNode(value);
 	if(size == 0){
-	    end = toAdd;
-	    toAdd.setPrev(start);
+	    start = toAdd;
+	    toAdd.setNext(end);
 	}
 	else{
 	    toAdd.setPrev(end);
@@ -50,13 +50,8 @@ public class MyLinkedList{
 	String ans = "[";
 	LNode current = start;
 	for (int pos = 0; pos < size; pos++){
-	    if (pos != size-1){
-	    	ans += current.value + ", ";
-	    	current = current.next;
-	    }
-	    else{
-	 	ans += current.value + "]";
-	    }
+	    ans += current.value + ", ";
+	    current = current.next;
 	}
 	return ans;
     }
