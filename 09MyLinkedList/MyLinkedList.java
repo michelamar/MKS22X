@@ -74,6 +74,12 @@ public class MyLinkedList implements Iterable<Integer>{
     }
 
     private void addAfter(LNode location, LNode toBeAdded){
+	if (location == end) {
+	    end.setNext(toBeAdded);
+	    toBeAdded.setPrev(end);
+	    end = toBeAdded;
+	    return;
+	}
 	toBeAdded.setPrev(location);
 	toBeAdded.setNext(location.next);
 	location.next.setPrev(toBeAdded);
@@ -187,7 +193,7 @@ public class MyLinkedList implements Iterable<Integer>{
 	}
 
 	public boolean hasNext() {
-	    return current != data.end;
+	    return current != null;
 	}
 
 	public Integer next(){
