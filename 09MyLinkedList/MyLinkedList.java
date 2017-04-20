@@ -115,6 +115,10 @@ public class MyLinkedList implements Iterable<Integer>{
 	    start.next.setPrev(null);
 	    start = start.next;
 	}
+	else if (size == 1) {
+	    start = null;
+	    end = null;
+	}
 	else if (index == size-1){
 	    end.prev.setNext(null);
 	    end = end.prev;
