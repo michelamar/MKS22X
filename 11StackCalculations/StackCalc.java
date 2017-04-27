@@ -19,6 +19,20 @@ public class StackCalc{
 	return a.equals("+") || a.equals("-") || a.equals("/") || a.equals("*");
     }
 
-    public boolean 
+    public static double (String op, double a, double b){
+	if (op.equals("+")){
+	    return a + b;
+	}
+	else if (op.equals("*")){
+	    return a * b;
+	}
+	else if (op.equals("-")){
+	    return b - a;
+	}
+	else{
+	    return b / a;
+	}
+    }
+ 
 
 }
