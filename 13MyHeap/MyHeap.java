@@ -4,7 +4,7 @@ public class MyHeap{
 
     private int size;
     private int type;
-    private String[] data;
+    private String[] data = new String[50];
 
     public MyHeap(){
 	size = 0;
@@ -59,7 +59,7 @@ public class MyHeap{
 
     private void pushUp(){
 	int pos = size;
-	while(pos > 1 && type * (data[pos].compareTo(data[pos/2])) > 0){
+	while(pos > 1 && type * (data[pos].compareTo(data[pos/2])) < 0){
 	    String temp = data[pos];
 	    data[pos] = data[pos/2];
 	    data[pos/2] = temp;
@@ -68,11 +68,32 @@ public class MyHeap{
 
     private void pushDown(){
 	int pos = 1;
-	while(pos < size && type * (data[pos].compareTo(data[pos*2])) < 0){
+	while(pos < size && type * (data[pos].compareTo(data[pos*2])) > 0){
 	    String temp = data[pos];
 	    data[pos] = data[pos*2];
 	    data[pos*2] = temp;
 	}
+    }
+
+    public String toString(){
+	String toReturn = "[";
+        for(int pos = 0; pos <= size; pos++){
+	    toReturn += data[pos] + ", ";
+	}
+	toReturn = toReturn.substring(0, toReturn.length() - 2) + "]";
+	return toReturn;
+    }
+
+    public static void main(String[]args){
+	MyHeap a = new MyHeap();
+	a.add("banana");
+	System.out.println(a);
+	a.add("pizza");
+	System.out.println(a);
+	a.add("abba");
+	System.out.println(a);
+	a.remove();
+	System.out.println(a);
     }
 
 
