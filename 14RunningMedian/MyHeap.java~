@@ -4,21 +4,13 @@ public class MyHeap{
 
     private int size;
     private int type;
-    private int[] data = new int[50];
-<<<<<<< HEAD
+    private String[] data = new String[50];
 
-=======
-    
->>>>>>> 623128ed569cb8c8fcc3c8f58fff64c74c893fd1
     public MyHeap(){
 	size = 0;
 	type = 1;
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 623128ed569cb8c8fcc3c8f58fff64c74c893fd1
     public MyHeap(boolean minMax){
 	if (minMax){
 	    size = 0;
@@ -29,14 +21,10 @@ public class MyHeap{
 	    type = -1;
 	}
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 623128ed569cb8c8fcc3c8f58fff64c74c893fd1
-    public void add(int s){
+    public void add(String s){
 	if(size == data.length){
-	    int[] temp = new int[data.length * 2];
+	    String[] temp = new String[data.length * 2];
 	    for(int pos = 0; pos < data.length; pos++){
 		temp[pos] = data[pos];
 	    }
@@ -46,29 +34,21 @@ public class MyHeap{
 	size++;
 	pushUp();
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 623128ed569cb8c8fcc3c8f58fff64c74c893fd1
-    public int remove(){
+    public String remove(){
 	if(size == 0){
 	    throw new NoSuchElementException();
 	}
 	else{
-	    int toReturn = data[1];
+	    String toReturn = data[1];
 	    data[1] = data[size];
 	    size--;
 	    pushDown();
 	    return toReturn;
 	}
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 623128ed569cb8c8fcc3c8f58fff64c74c893fd1
-    public int peek(){
+    public String peek(){
 	if(size == 0){
 	    throw new NoSuchElementException();
 	}
@@ -76,15 +56,11 @@ public class MyHeap{
 	    return data[1];
 	}
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 623128ed569cb8c8fcc3c8f58fff64c74c893fd1
     private void pushUp(){
 	int pos = size;
-	while(pos > 1 && (type * data[pos]) < data[pos/2]){
-	    int temp = data[pos];
+	while(pos > 1 && type * (data[pos].compareTo(data[pos/2])) < 0){
+	    String temp = data[pos];
 	    data[pos] = data[pos/2];
 	    data[pos/2] = temp;
 	}
@@ -92,20 +68,13 @@ public class MyHeap{
 
     private void pushDown(){
 	int pos = 1;
-	while(pos < size && (type * data[pos]) > data[pos*2]){
-	    int temp = data[pos];
+	while(pos < size && type * (data[pos].compareTo(data[pos*2])) > 0){
+	    String temp = data[pos];
 	    data[pos] = data[pos*2];
 	    data[pos*2] = temp;
 	}
     }
 
-<<<<<<< HEAD
-=======
-    public int size(){
-	return size;
-    }
-
->>>>>>> 623128ed569cb8c8fcc3c8f58fff64c74c893fd1
     public String toString(){
 	String toReturn = "[";
         for(int pos = 0; pos <= size; pos++){
@@ -116,26 +85,19 @@ public class MyHeap{
     }
 
     public static void main(String[]args){
-<<<<<<< HEAD
 	MyHeap a = new MyHeap();
-	a.add(12);
+	a.add("banana");
 	System.out.println(a);
-	a.add(88);
+	a.add("pizza");
 	System.out.println(a);
-	a.add(9);
+	a.add("abba");
 	System.out.println(a);
 	a.remove();
 	System.out.println(a);
-=======
-
->>>>>>> 623128ed569cb8c8fcc3c8f58fff64c74c893fd1
     }
 
 
 
 
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 623128ed569cb8c8fcc3c8f58fff64c74c893fd1
