@@ -75,7 +75,7 @@ public class Quick{
 	for (int pos = 0; pos < ary.length; pos++){
 	    ary[pos] = (int) (Math.random() * 900000000);
 	}
-	return a
+	return ary;
     }
 
     public static void main(String[]args){
