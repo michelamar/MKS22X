@@ -1,5 +1,7 @@
-public class MaxeSolver{
+public class MazeSolver{
 
     Maze board = new Maze();
+
+
 
 }
