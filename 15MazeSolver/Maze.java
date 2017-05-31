@@ -9,7 +9,7 @@ public class Maze{
 
   Location start,end;
   private char[][]maze;
-  private int maxRows,maxCols;
+  public int maxRows,maxCols;
 
 
   public Location getStart(){
